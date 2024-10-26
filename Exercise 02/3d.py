@@ -67,16 +67,16 @@ def gen_error(n, h, a, b):
     return error
 
 
-def gen_error_ls(n, h_ls, a, b):
+def gen_error_ls(n_ls, h_ls, a, b):
     """generate the errors of the numerical solutions"""
-    error_ls = [gen_error(n, h, a, b) for h in h_ls]
+    error_ls = [gen_error(n, h, a, b) for n, h in zip(n_ls, h_ls)]
     return np.array(error_ls)
 
 
 if __name__ == "__main__":
-    n = 10
-    h_ls = np.array([1 / 8, 1 / 16, 1 / 32, 1 / 64, 1 / 128, 1 / 256])
+    n_ls = [8, 16, 32, 64, 128, 256]
+    h_ls = np.array([1 / i for i in n_ls])
     a = 0
     b = 0
-    error_ls = gen_error_ls(n, h_ls, a, b)
+    error_ls = gen_error_ls(n_ls, h_ls, a, b)
     print(error_ls)
