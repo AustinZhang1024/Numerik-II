@@ -1,4 +1,5 @@
 import numpy as np
+import multiprocessing as mp
 
 
 def gen_A(n):
@@ -100,32 +101,36 @@ def SOR(x, A, b, omega, D, L):
     return x + np.dot(np.linalg.inv(D / omega + L), (b - np.dot(A, x)))
 
 
-def method(A, b, omega, h, tol, max_iter, method_name):
-    n = b.size + 1
+def method(A, B, a, omega, h, tol, max_iter, method_name):
+    n = B.size + 1
     x = np.zeros(n - 1)
     D = np.diag(np.diag(A))
     L = np.tril(A, -1)
     f_ls = gen_val(n, h, a, f)
 
+    print(f"calculating: n: {n}, omega: {omega}, h: {h}")
+
     for i in range(max_iter):
         # print(i)
-        x = method_name(x, A, b, omega, D, L)
+        x = method_name(x, A, B, omega, D, L)
         norm = np.linalg.norm(np.dot(A, x) - f_ls)
         if norm < tol:
-            return x, i
+            return x, i, omega, h
     else:
-        return x, i
+        return x, i, omega, h
 
 
 def gen_methods_ls(n_ls, h_ls, a, b, omega_ls, tol, max_iter, method_name):
     """generate the numerical solutions of the differential equation"""
     result_ls = []
+    pool = mp.Pool(4)
+    args = []
     for n, h in zip(n_ls, h_ls):
         A, B = gen_matrix(n, h, a, b)
         for omega in omega_ls:
-            print(f"n: {n}, omega: {omega}")
-            result = method(A, B, omega, h, tol, max_iter, method_name)
-            result_ls.append(result)
+            args.append((A, B, a, omega, h, tol, max_iter, method_name))
+
+    result_ls = pool.starmap(method, args)
     return result_ls
 
 
@@ -136,15 +141,16 @@ if __name__ == "__main__":
     b = 0
 
     # calculate spectral condition number
-    spectral_cond_ls = gen_spectral_cond_ls(n_ls, h_ls, a, b)
-    print(f"spectral condition number: {spectral_cond_ls}")
+    # spectral_cond_ls = gen_spectral_cond_ls(n_ls, h_ls, a, b)
+    # print(f"spectral condition number: {spectral_cond_ls}")
 
     # implement damped Jacobi method
-    omega_ls = np.linspace(0.1, 1.1, 11)
-    gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 100000, damped_jacobi)
+    omega_ls = np.array([i / 10 for i in range(1, 12)])
+    result_ls = gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 100000, damped_jacobi)
+    print(result_ls)
 
     # implement SOR method
-    omega_ls = np.linspace(0.1, 1.1, 11)
-    gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 100000, SOR)
+    # omega_ls = np.array([i / 10 for i in range(1, 21)])
+    # gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 100000, SOR)
 
     # print(A, b)

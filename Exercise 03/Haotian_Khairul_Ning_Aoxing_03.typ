@@ -11,20 +11,56 @@ $
     K_1(y,h) &=& f(y_k),
     K_2(y,h) &=& f(y_k + a_(21) h K_1) \
     &=& f(y_k + a_(21) h f(y_k)) \
-    &=& f(y_k) + a_(21) h f(y_k) diff_y f(y_k) + ((a_(21) h f(y_k))^2) / 2 diff_y^2 f(y_k) + O(h^3),
+    &=& f(y_k) + c_2 h f(y_k) diff_y f(y_k) + ((c_2 h f(y_k))^2) / 2 diff_(y y) f(y_k) + o(h^3),
     K_3(y,h) &=& f(y_k + a_(31) h K_1 + a_(32) h K_2) \
-    &=& f(y_k + a_(31) h f(y_k) + a_(32) h (f(y_k) + a_(21) h f(y_k))) \
-    &=& f(y_k) + (a_(31) h f(y_k) + a_(32) h (f(y_k) + a_(21) h f(y_k))) diff_y f(y_k) \
-    &&+ (a_(31) h f(y_k) + a_(32) h (f(y_k) + a_(21) h f(y_k)))^2/2 diff_y^2 f(y_k) + O(h^3)
+    &=& f(y_k + a_(31) h f(y_k) + a_(32) h K_2) \
+    &=& f(y_k) + (a_(31) h f(y_k) + a_(32) h (f(y_k) + a_(21) h f(y_k) diff_y f(y_k) + ((a_(21) h f(y_k))^2) / 2 diff_(y y) f(y_k) + o(h^3))) diff_y f(y_k) \
+    &&+ (a_(31) h f(y_k) + a_(32) h (f(y_k) + a_(21) h f(y_k) diff_y f(y_k) + ((a_(21) h f(y_k))^2) / 2 diff_(y y) f(y_k) + o(h^3)))^2/2 diff_(y y) f(y_k) + o(h^3) \
+    &=&f(y_k) + c_3 h f(y_k) diff_y f(y_k) + a_(32)c_2 h^2 f(y_k) (diff_y f(y_k))^2 + 1/2 h^2 c_3^2 (f(y_k))^2 diff_(y y) f(y_k) + o(h^3)
   )
 $
 
 Then, we can calculate:
 
 $
-  y(x_k+h) =& y(x_k) + h y'(x_k) + h^2 / 2 y''(x_k) + h^3 / 6 y'''(x_k) + O(h^4) \
+  y(x_k+h) =& y(x_k) + h y'(x_k) + h^2 / 2 y''(x_k) + h^3 / 6 y'''(x_k) + o(h^4) \
   =& y(x_k) + h f(y_k) + h^2 / 2 f(y_k) diff_y f(y_k) \
-  &+ h^3 / 6 [f(y_k) (diff_y f(y_k))^2+(f(y_k))^2diff_y^2 f(y_k)] + O(h^4)
+  &+ h^3 / 6 [f(y_k) (diff_y f(y_k))^2+(f(y_k))^2diff_(y y) f(y_k)] + o(h^4)
+$
+
+Now, we can calculate the local error:
+
+$
+  "le"(x_k+h)=&y(x_k+h)-y_(k+1) \
+  =& y(x_k+h)-y(x_k) - h Phi(y(x_k)) \
+  =&y(x_k) + h f(y_k) + h^2 / 2 f(y_k) diff_y f(y_k) \
+  &+ h^3 / 6 [f(y_k) (diff_y f(y_k))^2+(f(y_k))^2diff_(y y) f(y_k)] + o(h^4) \
+  &- y(x_k) - h (b_1 K_1 + b_2 K_2 + b_3 K_3) \
+  =& h f(y_k) + h^2 / 2 f(y_k) diff_y f(y_k)
+  + h^3 / 6 [f(y_k) (diff_y f(y_k))^2+(f(y_k))^2diff_(y y) f(y_k)] \
+  & + o(h^4) -h b_1 f(y_k) - h b_2 [
+    f(y_k) + c_2 h f(y_k) diff_y f(y_k) + ((c_2 h f(y_k))^2) / 2 diff_(y y) f(y_k) + o(h^3)
+  ] \
+  &- h b_3 [
+    f(y_k) + c_3 h f(y_k) diff_y f(y_k) + a_(32)c_2 h^2 f(y_k) (diff_y f(y_k))^2 + 1 / 2 h^2 c_3^2 (
+      f(y_k)
+    )^2 diff_(y y) f(y_k) + o(h^3)
+  ] \
+  =& (1-b_1 -b_2-b_3) h f(y_k) + (1 / 2-b_2 c_2 - b_3 c_3) h^2 f(y_k) diff_y f(y_k) + (1 / 6-a_32 b_3 c_2)h^3 f(y_k) (
+    diff_y f(y_k)
+  )^2 \
+  &+ (1 / 6-1 / 2 b_2 c_2^2- 1 / 2 b_3 c_3^2)h^3(f(y_k))^2 diff_(y y) f(y_k) + o(h^4)
+$
+
+so:
+
+$
+  cases(
+    sum_(i=n)^3 b_i = 1,
+    b_2c_2+ b_3c_3 = 1 / 2,
+    a_32 b_3 c_2 = 1 / 6,
+    b_2 c_2^2+  b_3 c_3^2 = 1 / 3
+  )
 $
 
 = Matrices in classical iteration schemes.
@@ -62,3 +98,12 @@ $
 $
 
 = Programming problem: damped Jacobi and SOR method.
+
+Code of question 1, 2 and 3 is shown in `3.py`.
+
+== (a)
+
+After running the code, we can get: *The spectral condition number of the matrix is increasing as $h$ decreases.*
+
+== (b)
+
