@@ -107,3 +107,6 @@ After running the code, we can get: *The spectral condition number of the matrix
 
 == (b)
 
+By observing the results, we can find that: *The results of the damped Jacobi method will not converge when $omega > 1$, and the bigger $h$ is, the slower the divergence of the result.*
+
+== (c)

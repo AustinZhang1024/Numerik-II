@@ -109,11 +109,15 @@ def method(A, B, a, omega, h, tol, max_iter, method_name):
             x = x + omega * np.dot(D_inv, (B - np.dot(A, x)))
         elif method_name == "SOR":
             x = x + np.dot(D_SOR_inv, (B - np.dot(A, x)))
+
+        if True in np.isnan(x):
+            return x, i, omega, h, True
+
         norm = np.linalg.norm(np.dot(A, x) - f_ls)
         if norm < tol:
-            return x, i, omega, h
+            return x, i, omega, h, False
     else:
-        return x, i, omega, h
+        return x, i, omega, h, False
 
 
 def gen_methods_ls(n_ls, h_ls, a, b, omega_ls, tol, max_iter, method_name):
@@ -141,11 +145,18 @@ if __name__ == "__main__":
 
     # implement damped Jacobi method
     omega_ls = np.array([i / 10 for i in range(1, 12)])
-    result_ls = gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 100000, "damped_jacobi")
-    print(result_ls)
+    result_ls = gen_methods_ls(
+        n_ls, h_ls, a, b, omega_ls, np.float64(1e-10), 100000, "damped_jacobi"
+    )
+
+    for x, i, omega, h, nan in result_ls:
+        print(f"omega: {omega}, h: {h}, iteration: {i}, nan: {nan}")
 
     # implement SOR method
-    # omega_ls = np.array([i / 10 for i in range(1, 21)])
-    # gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 100000, SOR)
+    omega_ls = np.array([i / 10 for i in range(1, 21)])
+    result_ls = gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 10000, "SOR")
+
+    for x, i, omega, h, nan in result_ls:
+        print(f"omega: {omega}, h: {h}, iteration: {i}, nan: {nan}")
 
     # print(A, b)
