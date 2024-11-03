@@ -91,16 +91,6 @@ def gen_spectral_cond_ls(n_ls, h_ls, a, b):
     return np.array(cond_ls)
 
 
-def damped_jacobi(x, A, b, omega, D, L):
-    """implement the damped Jacobi method"""
-    return x + omega * np.dot(np.linalg.inv(D), (b - np.dot(A, x)))
-
-
-def SOR(x, A, b, omega, D, L):
-    """implement the SOR method"""
-    return x + np.dot(np.linalg.inv(D / omega + L), (b - np.dot(A, x)))
-
-
 def method(A, B, a, omega, h, tol, max_iter, method_name):
     n = B.size + 1
     x = np.zeros(n - 1)
@@ -108,11 +98,17 @@ def method(A, B, a, omega, h, tol, max_iter, method_name):
     L = np.tril(A, -1)
     f_ls = gen_val(n, h, a, f)
 
+    D_inv = np.linalg.inv(D)
+    D_SOR_inv = np.linalg.inv(D / omega + L)
+
     print(f"calculating: n: {n}, omega: {omega}, h: {h}")
 
     for i in range(max_iter):
         # print(i)
-        x = method_name(x, A, B, omega, D, L)
+        if method_name == "damped_jacobi":
+            x = x + omega * np.dot(D_inv, (B - np.dot(A, x)))
+        elif method_name == "SOR":
+            x = x + np.dot(D_SOR_inv, (B - np.dot(A, x)))
         norm = np.linalg.norm(np.dot(A, x) - f_ls)
         if norm < tol:
             return x, i, omega, h
@@ -129,7 +125,6 @@ def gen_methods_ls(n_ls, h_ls, a, b, omega_ls, tol, max_iter, method_name):
         A, B = gen_matrix(n, h, a, b)
         for omega in omega_ls:
             args.append((A, B, a, omega, h, tol, max_iter, method_name))
-
     result_ls = pool.starmap(method, args)
     return result_ls
 
@@ -146,7 +141,7 @@ if __name__ == "__main__":
 
     # implement damped Jacobi method
     omega_ls = np.array([i / 10 for i in range(1, 12)])
-    result_ls = gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 100000, damped_jacobi)
+    result_ls = gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 100000, "damped_jacobi")
     print(result_ls)
 
     # implement SOR method
