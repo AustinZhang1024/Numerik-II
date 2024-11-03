@@ -73,10 +73,25 @@ def gen_error_ls(n_ls, h_ls, a, b):
     return np.array(error_ls)
 
 
+def calc_alpha_ls(n_ls, h_ls, error_ls):
+    """calculate the order of convergence"""
+    alpha_ls = np.zeros(len(n_ls) - 1)
+    for i in range(len(n_ls) - 1):
+        alpha_ls[i] = np.log(error_ls[i + 1] / error_ls[i]) / np.log(h_ls[i + 1] / h_ls[i])
+    return alpha_ls
+
+
 if __name__ == "__main__":
     n_ls = [8, 16, 32, 64, 128, 256]
     h_ls = np.array([1 / i for i in n_ls])
     a = 0
     b = 0
     error_ls = gen_error_ls(n_ls, h_ls, a, b)
-    print(error_ls)
+
+    for h, error in zip(h_ls, error_ls):
+        print(f"h = {h} \t error = {error}")
+
+    alpha_ls = calc_alpha_ls(n_ls, h_ls, error_ls)
+
+    print(f"alpha = {alpha_ls[-1]}")
+    
