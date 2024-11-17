@@ -1,2 +1,5 @@
 *.pdf
 **/test.py
+# pixi environments
+.pixi
+*.egg-info

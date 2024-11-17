@@ -93,7 +93,7 @@ def gen_spectral_cond_ls(n_ls, h_ls, a, b):
 
 def method(A, B, a, omega, h, tol, max_iter, method_name):
     n = B.size + 1
-    x = np.zeros(n - 1)
+    x = np.zeros((n - 1, 1))
     D = np.diag(np.diag(A))
     L = np.tril(A, -1)
     f_ls = gen_val(n, h, a, f)
@@ -128,7 +128,7 @@ def gen_methods_ls(n_ls, h_ls, a, b, omega_ls, tol, max_iter, method_name):
     for n, h in zip(n_ls, h_ls):
         A, B = gen_matrix(n, h, a, b)
         for omega in omega_ls:
-            args.append((A, B, a, omega, h, tol, max_iter, method_name))
+            args.append((-A, B, a, omega, h, tol, max_iter, method_name))
     result_ls = pool.starmap(method, args)
     return result_ls
 
@@ -140,8 +140,8 @@ if __name__ == "__main__":
     b = 0
 
     # calculate spectral condition number
-    spectral_cond_ls = gen_spectral_cond_ls(n_ls, h_ls, a, b)
-    print(f"spectral condition number: {spectral_cond_ls}")
+    # spectral_cond_ls = gen_spectral_cond_ls(n_ls, h_ls, a, b)
+    # print(f"spectral condition number: {spectral_cond_ls}")
 
     # implement damped Jacobi method
     omega_ls = np.array([i / 10 for i in range(1, 12)])
@@ -150,11 +150,12 @@ if __name__ == "__main__":
     )
 
     for x, i, omega, h, nan in result_ls:
+        # print(x)
         print(f"omega: {omega}, h: {h}, iteration: {i}, nan: {nan}")
 
     # implement SOR method
-    omega_ls = np.array([i / 10 for i in range(1, 21)])
-    result_ls = gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 10000, "SOR")
+    # omega_ls = np.array([i / 10 for i in range(1, 21)])
+    # result_ls = gen_methods_ls(n_ls, h_ls, a, b, omega_ls, 1e-10, 10000, "SOR")
 
-    for x, i, omega, h, nan in result_ls:
-        print(f"omega: {omega}, h: {h}, iteration: {i}, nan: {nan}")
+    # for x, i, omega, h, nan in result_ls:
+    #     print(f"omega: {omega}, h: {h}, iteration: {i}, nan: {nan}")
