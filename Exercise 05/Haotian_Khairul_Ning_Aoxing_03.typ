@@ -90,3 +90,16 @@ $
 $
 
 = Richarson iteration.
+
+Code is shown in `2.ipynb`
+
+After running the code, we can get:
+
++ The *bigger* the damping parameter, the *faster* the convergence.
++ The *wider* the mesh width, the *faster* the convergence.
+
+The figure below shows the logarithm of iteration number with different damping parameters and mesh widths.
+
+#align(center)[
+  #image("richardson.png", width: 70%)
+]
