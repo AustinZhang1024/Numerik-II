@@ -4,6 +4,8 @@
 
 = Several methods applied to the model problem of linear stability.
 
+Code is shown in `ex07_1.ipynb`.
+
 According to Remark 2.10, the solution of (2.7) is
 
 $
@@ -15,13 +17,13 @@ By implementing the three methods, we can compare the numerical solution with th
 The results are shown in the following figures.
 
 #align(center)[
-  #image("1_error_plot.png", width:70%)
+  #image("1_error_plot.png", width: 70%)
 ]
 
 For easier reading, the graph of the $log_2("meshes")$ and $log$
 
 #align(center)[
-  #image("1_log_error_plot.png", width:70%)
+  #image("1_log_error_plot.png", width: 70%)
 ]
 
 = Stability function of classical Runge-Kutta scheme.
