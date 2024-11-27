@@ -130,6 +130,12 @@ $
 
 == c
 
-
+Code is shown in `ex06_3.ipynb`
 
 == d
+
+After running the code, we can get the following plot:
+
+#align(center)[#image("d.png", width: 70%)]
+
+And we can get: The bigger the $epsilon$, the bigger the error.
