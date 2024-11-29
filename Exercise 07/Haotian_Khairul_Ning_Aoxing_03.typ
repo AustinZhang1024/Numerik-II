@@ -32,6 +32,17 @@ For easier reading, the graph of the $log_2("meshes")$ and $log$
 
 == a
 
+With Tayler expansion, we have
+
+$
+  u_(overline(x),i) =& (u(x_i) - u(x_(i-1))) / h \
+  =& (u(x_i) - u(x_i - h)) / h \
+  =& (u(x_i)-[u(x_i)-h u'(x_i)+h^2 / 2u''(x_i)+o(h^3)]) / h \
+  =& (h u'(x_i)-h^2 / 2u''(x_i)+o(h^3)) / h \
+  =& u'(x_i)-h / 2u''(x_i)+o(h^2) \
+  =& u'(x_i) + O(h)
+$
+
 == b
 
 == c
