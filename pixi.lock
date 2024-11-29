@@ -170,6 +170,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3339-validator-0.1.4-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3986-validator-0.1.1-pyh9f0ad1d_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/win-64/rpds-py-0.21.0-py313hf3b5b86_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/ruff-0.8.1-py313h331c231_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/scipy-1.14.1-py313h16bbbb2_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/send2trash-1.8.3-pyh5737063_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/setuptools-75.6.0-pyhff2d567_1.conda
@@ -3161,6 +3162,24 @@ packages:
   license_family: MIT
   size: 210099
   timestamp: 1730923136425
+- kind: conda
+  name: ruff
+  version: 0.8.1
+  build: py313h331c231_0
+  subdir: win-64
+  url: https://conda.anaconda.org/conda-forge/win-64/ruff-0.8.1-py313h331c231_0.conda
+  sha256: 385d9fc0abbdd66dd68c0a71e8a9a3d57a4b1a069bcb452c991d51bde3781e21
+  md5: 6faa6c22f03f4d1f769f42fed9602d1e
+  depends:
+  - python >=3.13,<3.14.0a0
+  - python_abi 3.13.* *_cp313
+  - ucrt >=10.0.20348.0
+  - vc >=14.2,<15
+  - vc14_runtime >=14.29.30139
+  license: MIT
+  license_family: MIT
+  size: 6892876
+  timestamp: 1732870841177
 - kind: conda
   name: scipy
   version: 1.14.1

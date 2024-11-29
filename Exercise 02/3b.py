@@ -77,7 +77,9 @@ def calc_alpha_ls(n_ls, h_ls, error_ls):
     """calculate the order of convergence"""
     alpha_ls = np.zeros(len(n_ls) - 1)
     for i in range(len(n_ls) - 1):
-        alpha_ls[i] = np.log(error_ls[i + 1] / error_ls[i]) / np.log(h_ls[i + 1] / h_ls[i])
+        alpha_ls[i] = np.log(error_ls[i + 1] / error_ls[i]) / np.log(
+            h_ls[i + 1] / h_ls[i]
+        )
     return alpha_ls
 
 
@@ -94,4 +96,3 @@ if __name__ == "__main__":
     alpha_ls = calc_alpha_ls(n_ls, h_ls, error_ls)
 
     print(f"alpha = {alpha_ls[-1]}")
-    

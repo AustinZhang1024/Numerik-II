@@ -1,9 +1,15 @@
 repos:
--   repo: local
+  - repo: local
     hooks:
-    -   id: nbconvert
+      - id: ruff
+        name: Ruff
+        entry: pixi run ruff format
+        types_or: [python, jupyter]
+        language: system
+        stages: [pre-commit]
+      - id: nbconvert
         name: Tidy Jupyter Notebooks
         entry: pixi run python -m nbconvert --execute --inplace --ExecutePreprocessor.record_timing=False
         language: system
-        files: \.ipynb$
+        types: [jupyter]
         stages: [pre-commit]

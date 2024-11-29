@@ -39,8 +39,8 @@ def main():
     print(f"h_k = {float(h_1)}: {float(y_1)}")
     print(f"h_k = {float(h_2)}: {float(y_2)}")
 
-    print(y_real(1)-float(y_1))
-    print(y_real(1)-float(y_2))
+    print(y_real(1) - float(y_1))
+    print(y_real(1) - float(y_2))
 
     plt.plot(np.linspace(0, 1, len(ls_1)), ls_1, label="h = 0.2")
     plt.plot(np.linspace(0, 1, len(ls_2)), ls_2, label="h = 0.1")
