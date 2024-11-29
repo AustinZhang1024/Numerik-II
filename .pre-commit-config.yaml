@@ -1,0 +1,9 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: nbconvert
+        name: Tidy Jupyter Notebooks
+        entry: pixi run python -m nbconvert --execute --inplace *.ipynb **/*.ipynb
+        language: system
+        files: \.ipynb$
+        stages: [pre-commit]
