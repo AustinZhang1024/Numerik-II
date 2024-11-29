@@ -28,6 +28,46 @@ For easier reading, the graph of the $log_2("meshes")$ and $log$
 
 = Stability function of classical Runge-Kutta scheme.
 
+According to Example 1.33, we can get $A$ and $bold(b)^T$ of the _Classical Runge-Kutta scheme_.
+
+$
+  A = mat(
+    0,0,0,0;
+    1/2,0,0,0;
+    0,1/2,0,0;
+    0,0,1,0
+  )
+  quad
+  bold(b)^T = mat(1/6,1/3,1/3,1/6)
+$
+
+According to Definition 2.12, we can calaulate the stability function of the _Classical Runge-Kutta scheme_.
+
+$
+  R(z) =& 1 + z bold(b)^T (I-z A)^(-1) bold(1) \
+  =& 1 + z mat(1/6,1/3,1/3,1/6) (
+    mat(1,0,0,0;0,1,0,0;0,0,1,0;0,0,0,1)-z mat(0,0,0,0;1/2,0,0,0;0,1/2,0,0;0,0,1,0)
+  )^(-1) vec(1,1,1,1) \
+  =& 1 + z mat(1/6,1/3,1/3,1/6)mat(1,0,0,0;-z/2,1,0,0;0,-z/2,1,0;0,0,-z,1)^(-1) vec(1,1,1,1) \
+  =& 1 + z mat(1/6,1/3,1/3,1/6)mat(1,0,0,0;z/2,1,0,0;z^2/4,z/2,1,0;z^3/4,z^2/2,z,1) vec(1,1,1,1) \
+  =& 1 + z vec(1/6+z/6+z^2/12+z^3/24, 1/3+z/6+z^2/12, 1/3+z/6, 1/6)^T vec(1,1,1,1) \
+  =& 1+z(1/6+z/6+z^2/12+z^3/24 + 1/3+z/6+z^2/12 + 1/3+z/6 + 1/6) \
+  =& 1 + z + z^2/2 + z^3/6 + z^4/24
+$
+
+According to Definition 2.16, the domain of stability is the set:
+
+$
+  S = {z in CC: abs(R(z)) <= 1} = {z in CC: abs(1 + z + z^2/2 + z^3/6 + z^4/24) <= 1}
+$
+
+To draw the sketch of the domain of stability, code is shown in `ex07_2.ipynb`.
+The domain of stability is shown in the following figure.
+
+#align(center)[
+  #image("2_stability_domain.png", width: 70%)
+]
+
 = Second order boundary value problem with first order term and upwind discretization; GMRES.
 
 == a
