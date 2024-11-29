@@ -3,7 +3,7 @@ repos:
     hooks:
     -   id: nbconvert
         name: Tidy Jupyter Notebooks
-        entry: pixi run python -m nbconvert --execute --inplace *.ipynb **/*.ipynb
+        entry: pixi run python -m nbconvert --execute --inplace --ExecutePreprocessor.record_timing=False
         language: system
         files: \.ipynb$
         stages: [pre-commit]
