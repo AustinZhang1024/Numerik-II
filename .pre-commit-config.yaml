@@ -1,21 +1,41 @@
 repos:
   - repo: local
     hooks:
+      - id: pyright
+        name: Pyright
+        entry: pixi run pyright
+        types_or: [python, jupyter]
+        language: system
+        stages: [pre-commit]
+
       - id: ruff-check
         name: Ruff check
         entry: pixi run ruff check
         types_or: [python, jupyter]
         language: system
         stages: [pre-commit]
+
       - id: ruff-format
         name: Ruff format
         entry: pixi run ruff format
         types_or: [python, jupyter]
         language: system
         stages: [pre-commit]
+
       - id: nbconvert
         name: Tidy Jupyter Notebooks
         entry: pixi run python -m nbconvert --execute --inplace --ExecutePreprocessor.record_timing=False
         language: system
         types: [jupyter]
         stages: [pre-commit]
+
+      - id: commitizen
+        name: commitizen check
+        description: >
+          Check whether the current commit message follows committing rules. Allow
+          empty commit messages by default, because they typically indicate to Git
+          that the commit should be aborted.
+        entry: pixi run cz check
+        args: [--allow-abort, --commit-msg-file]
+        stages: [commit-msg]
+        language: system
