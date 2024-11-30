@@ -112,7 +112,12 @@ Code is shown in the attachment `3b.py`.
 
 And the result is:
 
-#align(center)[#table(align: center, columns: 6, $1/8$, $1/16$, $1/32$, $1/64$, $1/128$, $1/256$, $0.1785$, $0.0063$, $0.0022$, $0.0008$, $0.0003$, $9.8757 times 10^(-5)$)]
+#align(center)[#table(
+    align: center,
+    columns: 6,
+    $1 / 8$, $1 / 16$, $1 / 32$, $1 / 64$, $1 / 128$, $1 / 256$,
+    $0.1785$, $0.0063$, $0.0022$, $0.0008$, $0.0003$, $9.8757 times 10^(-5)$,
+  )]
 
 == (c)
 

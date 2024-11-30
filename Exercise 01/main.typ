@@ -16,7 +16,7 @@
   Exercise Group 03
 
   #for (first, last, email) in info [
-    #box(width:7em)[#align(left)[#first, #last]] #box(width:12em)[#align(right)[#link("mailto:" + email)]] \
+    #box(width: 7em)[#align(left)[#first, #last]] #box(width: 12em)[#align(right)[#link("mailto:" + email)]] \
   ]
 
 ]
@@ -49,8 +49,29 @@ and $y_k$ is shown in the following table:
     columns: 11,
     align: center,
     [$i$], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10],
-    [$h_1$], [0.9722], [0.9354], [0.8966], [0.8587], [0.8228], [], [], [], [], [],
-    [$h_2$], [0.9917], [0.9785], [0.9624], [0.9447], [0.9262], [0.9074], [0.8886], [0.8701], [0.8520], [0.8344],
+    [$h_1$],
+    [0.9722],
+    [0.9354],
+    [0.8966],
+    [0.8587],
+    [0.8228],
+    [],
+    [],
+    [],
+    [],
+    [],
+
+    [$h_2$],
+    [0.9917],
+    [0.9785],
+    [0.9624],
+    [0.9447],
+    [0.9262],
+    [0.9074],
+    [0.8886],
+    [0.8701],
+    [0.8520],
+    [0.8344],
   )]
 
 == (b)
@@ -85,9 +106,7 @@ According to the table above, we can get: *The error is decreasing as $h$ decrea
 From Remark 2.3, we just need to proove:
 
 $
-  lim_(p -> infinity) ||underline(x)||_p = lim_(p -> infinity) (
-    sum^n_(i=1)|x_i|^p
-  )^(1 / p)=max_(i=1,dots,n)|x_i| = ||underline(x)||_infinity
+  lim_(p -> infinity) ||underline(x)||_p = lim_(p -> infinity) ( sum^n_(i=1)|x_i|^p )^(1 / p)=max_(i=1,dots,n)|x_i| = ||underline(x)||_infinity
 $
 
 because $|underline(x_i)| > 0$, therefore:
@@ -101,9 +120,7 @@ so we can get:
 $
   &max_(i=1,dots,n)|x_i| = lim_(p -> infinity) (max_(i=1,dots,n)|x_i|^p)^(1 / p) \
   & lt.eq.slant lim_(p -> infinity) (sum^n_(i=1)|x_i|^p)^(1 / p) = lim_(p -> infinity) ||underline(x)||_p \
-  &lt.eq.slant lim_(p -> infinity) (
-    n times max_(i=1,dots,n)|x_i|^p
-  )^(1 / p) = lim_(p -> infinity) n^(1 / p) max_(i=1,dots,n)|x_i|=max_(i=1,dots,n)|x_i| lim_(p -> infinity) n^(1 / p) \
+  &lt.eq.slant lim_(p -> infinity) ( n times max_(i=1,dots,n)|x_i|^p )^(1 / p) = lim_(p -> infinity) n^(1 / p) max_(i=1,dots,n)|x_i|=max_(i=1,dots,n)|x_i| lim_(p -> infinity) n^(1 / p) \
   &= max_(i=1,dots,n)|x_i|
 $
 
@@ -119,9 +136,7 @@ $
 thus:
 
 $
-  ||A underline(x)||_2=(sum^n_(i=1)|sum_(j=1)^n a_(i j)x_j|^2)^(1 / 2) &lt.eq.slant (
-    sum^n_(i=1)sum_(j=1)^n|a_(i j)|^2|x_j|^2
-  )^(1 / 2) \
+  ||A underline(x)||_2=(sum^n_(i=1)|sum_(j=1)^n a_(i j)x_j|^2)^(1 / 2) &lt.eq.slant ( sum^n_(i=1)sum_(j=1)^n|a_(i j)|^2|x_j|^2 )^(1 / 2) \
   &= (sum^n_(i=1)sum_(j=1)^n|a_(i j)|^2 sum_(j=1)^n |x_j|^2)^(1 / 2) \
   &= (sum^n_(i=1)sum_(j=1)^n|a_(i j)|^2)^(1 / 2) (sum_(j=1)^n |x_j|^2)^(1 / 2) \
   &= ||A||_F ||underline(x)||_2
@@ -139,9 +154,7 @@ $
 
 $
   u_(x x,i)&=(u(x_(i+1))-2u(x_(i))+u(x_(i-1))) / h^2 \
-  &stretch("=")^("Taylor expansion") ([u(x_i)+h u'(x_i)+h^2 / 2 u''(x_i)+h^3 / 6 u'''(x_i)+o(h^4)]-2u(
-    x_i
-  )) / h^2 \ &quad+([u(x_i)-h u'(x_i)+h^2 / 2u''(x_i)-h^3 / 6u'''(x_i)+o(h^4)]) / (h^2) \
+  &stretch("=")^("Taylor expansion") ([u(x_i)+h u'(x_i)+h^2 / 2 u''(x_i)+h^3 / 6 u'''(x_i)+o(h^4)]-2u( x_i )) / h^2 \ &quad+([u(x_i)-h u'(x_i)+h^2 / 2u''(x_i)-h^3 / 6u'''(x_i)+o(h^4)]) / (h^2) \
   &=(h^2u''(x_i)+o(h^4)) / h^2 \
   &=u''(x_i)+o(h^2)
 $

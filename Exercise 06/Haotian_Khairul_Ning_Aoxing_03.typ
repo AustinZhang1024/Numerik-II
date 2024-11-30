@@ -12,9 +12,7 @@ $
     b_1c_1 + b_2c_2 = 1/2,
     b_1c_1^2 + b_2c_2^2 = 1/3
   ) \
-  D(
-    2
-  ) =& cases(
+  D( 2 ) =& cases(
     b_1a_11+b_2a_21 = b_1(1-c_1),
     b_1a_12+b_2a_22 = b_2(1-c_2),
     b_1c_1a_11+b_2c_2a_21 = 1/2b_1(1-c_1^2),
@@ -119,12 +117,12 @@ We can observe: the smaller the $epsilon$, the graph will be more like a straigh
 With Taylor expansion, we can get:
 
 $
-  u_(x,i) =& (u(x_(i+1))-u(x_(i-1)))/(2h) \
-  =& (u(x_(i)+h)-u(x_(i)-h))/(2h) \
-  =& [(u(x_i)+h u'(x_i)+h^2/2 u''(x_i)+h^3/6 u'''(x_i)+o(h^3))\
-  &-(u(x_i)-h u'(x_i)+h^2/2 u''(x_i)-h^3/6 u'''(x_i)+o(h^3))] div (2h) \
-  =& (2h u'(x_i)+2h^3/6 u'''(x_i)+o(h^3))/(2h) \
-  =& u'(x_i)+h^2/3 u'''(x_i)+o(h^2) \
+  u_(x,i) =& (u(x_(i+1))-u(x_(i-1))) / (2h) \
+  =& (u(x_(i)+h)-u(x_(i)-h)) / (2h) \
+  =& [(u(x_i)+h u'(x_i)+h^2 / 2 u''(x_i)+h^3 / 6 u'''(x_i)+o(h^3))\
+    &-(u(x_i)-h u'(x_i)+h^2 / 2 u''(x_i)-h^3 / 6 u'''(x_i)+o(h^3))] div (2h) \
+  =& (2h u'(x_i)+2h^3 / 6 u'''(x_i)+o(h^3)) / (2h) \
+  =& u'(x_i)+h^2 / 3 u'''(x_i)+o(h^2) \
   =& u'(x_i)+O(h^2)
 $
 

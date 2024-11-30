@@ -38,17 +38,9 @@ $
   &- y(x_k) - h (b_1 K_1 + b_2 K_2 + b_3 K_3) \
   =& h f(y_k) + h^2 / 2 f(y_k) diff_y f(y_k)
   + h^3 / 6 [f(y_k) (diff_y f(y_k))^2+(f(y_k))^2diff_(y y) f(y_k)] \
-  & + o(h^4) -h b_1 f(y_k) - h b_2 [
-    f(y_k) + c_2 h f(y_k) diff_y f(y_k) + ((c_2 h f(y_k))^2) / 2 diff_(y y) f(y_k) + o(h^3)
-  ] \
-  &- h b_3 [
-    f(y_k) + c_3 h f(y_k) diff_y f(y_k) + a_(32)c_2 h^2 f(y_k) (diff_y f(y_k))^2 + 1 / 2 h^2 c_3^2 (
-      f(y_k)
-    )^2 diff_(y y) f(y_k) + o(h^3)
-  ] \
-  =& (1-b_1 -b_2-b_3) h f(y_k) + (1 / 2-b_2 c_2 - b_3 c_3) h^2 f(y_k) diff_y f(y_k) + (1 / 6-a_32 b_3 c_2)h^3 f(y_k) (
-    diff_y f(y_k)
-  )^2 \
+  & + o(h^4) -h b_1 f(y_k) - h b_2 [ f(y_k) + c_2 h f(y_k) diff_y f(y_k) + ((c_2 h f(y_k))^2) / 2 diff_(y y) f(y_k) + o(h^3) ] \
+  &- h b_3 [ f(y_k) + c_3 h f(y_k) diff_y f(y_k) + a_(32)c_2 h^2 f(y_k) (diff_y f(y_k))^2 + 1 / 2 h^2 c_3^2 ( f(y_k) )^2 diff_(y y) f(y_k) + o(h^3) ] \
+  =& (1-b_1 -b_2-b_3) h f(y_k) + (1 / 2-b_2 c_2 - b_3 c_3) h^2 f(y_k) diff_y f(y_k) + (1 / 6-a_32 b_3 c_2)h^3 f(y_k) ( diff_y f(y_k) )^2 \
   &+ (1 / 6-1 / 2 b_2 c_2^2- 1 / 2 b_3 c_3^2)h^3(f(y_k))^2 diff_(y y) f(y_k) + o(h^4)
 $
 
