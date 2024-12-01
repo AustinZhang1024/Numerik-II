@@ -83,6 +83,18 @@ $
 
 == b
 
+Code is shown in `ex07_3.ipynb`.
+
 == c
+
+For better comparation, we plot the graph of the $-log(epsilon)$ and $log("error")$
+
+#align(center)[
+  #image("3_c.png", width: 70%)
+]
+
+We can get:
++ The error becomes larger as the $epsilon$ becomes smaller.
++ The erroe becomes smaller as the $h$ becomes smaller.
 
 == d
