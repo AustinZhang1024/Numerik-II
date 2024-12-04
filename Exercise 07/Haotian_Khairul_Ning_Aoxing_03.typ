@@ -1,6 +1,6 @@
 #import "conf.typ": conf
 
-#show: conf.with(exercise_num: [06])
+#show: conf.with(exercise_num: [07])
 
 = Several methods applied to the model problem of linear stability.
 
