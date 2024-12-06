@@ -4,6 +4,10 @@
 
 = Matrix exponential.
 
+== i
+
+// TODO: How to prove here?
+
 == ii
 
 According to Definition 2.24, we can get:
@@ -39,6 +43,10 @@ $
 $
 
 So $e^A$ is invertible and $(e^A)^(-1) = e^(-A)$.
+
+== iv
+
+// TODO: How to prove here?
 
 == v
 
