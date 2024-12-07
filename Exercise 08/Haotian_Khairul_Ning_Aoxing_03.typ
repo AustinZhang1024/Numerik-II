@@ -74,6 +74,62 @@ $
   =& 1-bold(b)^T A^(-1) bold(1) \
 $
 
-// TODO: How to prove here?
+So we only need to prove $bold(b)^T A^(-1) bold(1) = 1$.
+
+Let $A = mat(a_11, a_12, dots, a_(1 n);
+a_21, a_22, dots, a_(2 n);
+dots.v, dots.v, , dots.v;
+a_(n 1), a_(n 2), dots, a_(n n))$ and $bold(x) = vec(x_1, x_2, dots.v, x_n)^T = bold(b)^T A^(-1)$.
+
+So $bold(x) A = bold(b)^T$ and $bold(b)^T A^(-1) bold(1) = sum_(i=1)^n x_i$. Then we can get:
+
+$
+  cases(
+    a_11 x_1 + a_21 x_2 + dots + a_(n 1) x_n = b_1,
+    a_12 x_1 + a_22 x_2 + dots + a_(n 2) x_n = b_2,
+    dots,
+    a_(1 n) x_1 + a_(2 n) x_2 + dots + a_(n n) x_n = b_n
+  )
+$ <A_x_b>
+
+== Case (a)
+
+In this case, we can get:
+
+$
+  cases(
+    a_11 x_1 + a_21 x_2 + dots + a_(n 1) x_n = a_(s 1),
+    a_12 x_1 + a_22 x_2 + dots + a_(n 2) x_n = a_(s 2),
+    dots,
+    a_(1 n) x_1 + a_(2 n) x_2 + dots + a_(n n) x_n = a_(s n)
+  )
+$
+
+or
+
+$
+  cases(
+    a_11 x_1 + dots + a_(s 1) (x_s - 1) + dots + a_(n 1) x_n = 0,
+    a_12 x_1 + dots + a_(s 2) (x_s - 1) + dots + a_(n 2) x_n = 0,
+    dots,
+    a_(1 n) x_1 + dots + a_(s n) (x_s - 1) + dots + a_(n n) x_n = 0
+  )
+$
+
+Because $A$ is non-singular, we can get $x_1 = dots = x_s - 1 = dots = x_n = 0$.
+
+So $sum_(i=1)^n x_i = 1$
+
+== Case (b)
+
+From the first line of @A_x_b, we can get
+
+$
+  b_1 x_1 + b_1 x_2 + dots + b_1 x_n = b_1
+$
+
+So $sum_(i=1)^n x_i = 1$
+
+Above all, we can get $sum_(i=1)^n x_i = 1$ or $R(infinity)=0$ if one of condition a and b satisfied.
 
 = Second order boundary value problem with first order term and upwind discretization, GMRES with restart.
