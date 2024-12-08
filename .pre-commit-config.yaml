@@ -1,6 +1,13 @@
 repos:
   - repo: local
     hooks:
+      - id: nbconvert
+        name: Tidy Jupyter Notebooks
+        entry: pixi run python -m nbconvert --execute --inplace --ExecutePreprocessor.record_timing=False
+        language: system
+        types: [jupyter]
+        stages: [pre-commit]
+
       - id: typstyle
         name: Typstyle
         entry: typstyle -i
@@ -27,13 +34,6 @@ repos:
         entry: pixi run ruff format
         types_or: [python, jupyter]
         language: system
-        stages: [pre-commit]
-
-      - id: nbconvert
-        name: Tidy Jupyter Notebooks
-        entry: pixi run python -m nbconvert --execute --inplace --ExecutePreprocessor.record_timing=False
-        language: system
-        types: [jupyter]
         stages: [pre-commit]
 
       - id: commitizen
