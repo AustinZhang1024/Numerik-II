@@ -46,3 +46,10 @@ repos:
         args: [--allow-abort, --commit-msg-file]
         stages: [commit-msg]
         language: system
+
+      - id: typst
+        name: Typst
+        entry: typst compile
+        files: \.typ$
+        language: system
+        stages: [pre-commit]
