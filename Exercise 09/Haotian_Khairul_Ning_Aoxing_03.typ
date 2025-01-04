@@ -128,3 +128,27 @@ $
 $
 
 = Conjugate gradient (CG) method.
+
+Code is shown in `sheet09_3.ipynb`.
+
+== a
+
+After executed the code, we can get the number of iteration keeps $1/(2h)$.
+
+#align(center)[
+  #image("sheet09_3_a.svg", width: 75%)
+]
+
+== b
+
+The CG method implemented by `scipy.sparse.linalg.cg`, the number of iterations is only 1.
+It's way faster than my own implementation.
+
+== c
+
+To measure the performance of the two CG methods,
+I decide to use the two methods solve the question 3.a in $1000$ times and calculate the total time.
+
+The total time of my own implementation is $25.13917112350464$s, and the total time of `scipy.sparse.linalg.cg` is $22.611215353012085$s.
+
+So the `scipy.sparse.linalg.cg` is $10$% faster than my own implementation.
