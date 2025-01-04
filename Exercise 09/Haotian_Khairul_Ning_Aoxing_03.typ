@@ -74,4 +74,57 @@ $
 
 = Moore-Penrose inverse, pseudo inverse.
 
+We can assume that the Moore-Penrose inverse $A^+ = mat(alpha; beta; gamma)$
+
+According to the Moore-Penrose conditions, we can get:
+
+$
+  #let Amat = math.mat(2, 3, 4)
+  #let Aplus = math.mat((sym.alpha,), (sym.beta,), (sym.gamma,))
+  cases(
+    Amat Aplus Amat = Amat,
+    Aplus Amat Aplus = Aplus,
+    (Amat Aplus)^T = Amat Aplus,
+    (Aplus Amat)^T = Aplus Amat,
+  )
+$
+
+By calculating the equations above, we can get:
+
+$
+  cases(
+    mat(2(2alpha+3beta+4gamma), 3(2alpha+3beta+4gamma), 4(2alpha+3beta+4gamma)) = mat(2, 3, 4),
+    mat(2(2alpha+3beta+4gamma); 3(2alpha+3beta+4gamma); 4(2alpha+3beta+4gamma)) = mat(2; 3; 4),
+    mat(2alpha+3beta+4gamma) = mat(2alpha+3beta+4gamma),
+    mat(2alpha,3alpha,4alpha;2beta,3beta,4beta;2gamma,3gamma,4gamma) = mat(2alpha,2beta,2gamma;3alpha,3beta,3gamma;4alpha,4beta,4gamma),
+  )
+$
+
+By rearranging the equations above, we can get:
+
+$
+  cases(
+    2alpha+3beta+4gamma = 1,
+    3alpha = 2beta,
+    4alpha = 2gamma,
+    4beta = 3gamma,
+  )
+$
+
+So we can get the answer:
+
+$
+  cases(
+    alpha = 2/9,
+    beta = 1/3,
+    gamma = 4/9,
+  )
+$
+
+And the Moore-Penrose inverse is:
+
+$
+  A^+ = mat(2/9; 1/3; 4/9)
+$
+
 = Conjugate gradient (CG) method.
