@@ -149,6 +149,6 @@ It's way faster than my own implementation.
 To measure the performance of the two CG methods,
 I decide to use the two methods solve the question 3.a in $1000$ times and calculate the total time.
 
-The total time of my own implementation is $25.13917112350464$s, and the total time of `scipy.sparse.linalg.cg` is $22.611215353012085$s.
+The total time of my own implementation is $25.13917112350464$s, and the total time of `scipy.sparse.linalg.cg` is $22.611215353012085$s (Time here maybe not the same as in the code because it changes every time after execution).
 
 So the `scipy.sparse.linalg.cg` is $10$% faster than my own implementation.
