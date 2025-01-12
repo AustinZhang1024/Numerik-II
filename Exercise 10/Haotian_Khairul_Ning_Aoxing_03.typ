@@ -1,6 +1,6 @@
 #import "conf.typ": conf
 
-#show: conf.with(exercise_num: [09])
+#show: conf.with(exercise_num: [10])
 
 = Stability function of ode23s.
 
