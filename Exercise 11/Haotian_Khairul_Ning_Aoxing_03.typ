@@ -83,10 +83,32 @@ So $A+B$ is singular and is not a M-matrix. #h(1fr) #math.qed
 
 = Preconditioned conjugate gradient (PCG) method.
 
-== a
+Code can be seen in `sheet11_3.ipynb`.
 
-== b
+So we can get the number of iteration for each precondition.
 
-== c
+The result is as follows:
 
-== d
+#align(center)[
+  #table(
+    align: center,
+    columns: 9,
+    $h$,
+    $1 / 8$,
+    $1 / 16$,
+    $1 / 32$,
+    $1 / 64$,
+    $1 / 128$,
+    $1 / 256$,
+    $1 / 512$,
+    $1 / 1024$,
+
+    $M=I$, $4$, $8$, $16$, $32$, $64$, $128$, $256$, $513$,
+    $M=op("diag")(A)$, $4$, $8$, $16$, $32$, $64$, $128$, $256$, $512$,
+    $M=op("SSOR")(A)$, $7$, $15$, $28$, $49$, $89$, $168$, $300$, $467$,
+    $M=L^T L$, $7$, $11$, $12$, $13$, $15$, $16$, $17$, $18$,
+  )
+]
+
+// TODO: What can you observe?
+// TODO: Find an explanation for the behavior of the Jacobi preconditioner.
