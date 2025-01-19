@@ -4,6 +4,32 @@
 
 = BDF2 with variable step size.
 
+Consider the Newtown polynomial $p(x)$ of degree 2 through the points $(x_(k+1), y_(k+1)), (x_k, y_k), (x_(k-1), y_(k-1))$.
+
+Then we have:
+
+$
+  p(x) &= [y_(k+1)] + (x - x_(k+1)) [y_(k+1), y_k] + (x-x_(k+1))(x - x_k) [y_(k+1), y_k, y_(k-1)] \
+  &= y_(k+1) + (x - x_(k+1)) (y_k - y_(k+1)) / (x_k - x_(k+1)) + ((x - x_(k+1))(x - x_k)) / (x_(k-1)-x_(k+1))((y_(k-1)-y_k) / (x_(k-1)-x_k) - (y_k-y_(k+1)) / (x_k-x_(k+1))) \
+  &= y_(k+1) + (x - x_(k+1)) (y_(k+1) - y_k) / h_(k+1) - ((x - x_(k+1))(x - x_k)) / (h_k+h_(k+1))((y_k-y_(k-1)) / (h_k) - (y_(k+1)-y_k) / (h_(k+1)))
+$
+
+Then we have:
+
+$
+  p'(x) &= (y_(k+1) - y_k) / h_(k+1) - ((x - x_(k+1))+(x-x_k)) / (h_k+h_(k+1))((y_k-y_(k-1)) / (h_k) - (y_(k+1)-y_k) / (h_(k+1)))
+$
+
+Then we have:
+
+$
+  f(x_(k+1), y_(k+1)) =& p'(x_(k+1)) \
+  =& (y_(k+1) - y_k) / h_(k+1) - h_(k+1) / (h_k+h_(k+1))((y_k-y_(k-1)) / (h_k) - (y_(k+1)-y_k) / (h_(k+1))) \
+  =& h_(k+1) / (h_k (h_k+h_(k+1)))y_(k-1) - (1 / h_(k+1)+h_(k+1) / (h_k (h_k+h_(k+1)))+1 / (h_k+h_(k+1)))y_k \
+  & + (1 / h_(k+1)+1 / (h_k+h_(k+1)))y_(k+1) \
+  =& sigma_(k+1) / (h_k+h_(k+1))y_(k-1) - (sigma_(k+1)^2+2sigma_(k+1)+1) / (h_(k+1)(sigma_(k+1)+1))y_k + (2sigma_(k+1)+1) / (h_(k+1)(sigma_(k+1)+1))y_(k+1)
+$
+
 = Properties of M-matrices.
 
 Recall the Definition 8.17 of M-matrices.
@@ -110,5 +136,18 @@ The result is as follows:
   )
 ]
 
-// TODO: What can you observe?
-// TODO: Find an explanation for the behavior of the Jacobi preconditioner.
+According to the result,
+we can find that the number of iteration for $M=I$ and $M=op("diag")(A)$ are approximately equal to $1/(2h)$.
+The number of iteration for $M=op("SSOR")(A)$ is a bit slower than no preconditioning and Jacobi preconditioner, however, it performs better than them then the step size is very small($h=1/1024$).
+As for $M=L^T L$,
+the number of iteration is the smallest among all the preconditioners and the number of iteration grows linearly when $h$ decreases exponentially.
+
+And in this condition,
+$op("diag")(A) = 2/h^2 I$,
+$underline(z)_k$ maybe smaller compared to $M=I$,
+but the coefficient $1/h^2$ does not affect the value of $underline(x)^((k))$,
+$underline(r)^((k))$ and $mu_(k+1)$.
+So we can consider $M=op("diag")(A)$ just changes the while loop condition smaller than the condition of $M=I$ by times the number $h^2/2$.
+It should be a little bit faster than $M=I$,
+but when $epsilon$ is very small,
+the difference is not significant.
